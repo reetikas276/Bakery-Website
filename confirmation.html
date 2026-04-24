@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Order Confirmation - Sweet Bite Bakery</title>
+<link rel="stylesheet" href="style.css">
+
+<script>
+function showConfirmation()
+{
+    var items = ["Chocolate Cake", "Cappuccino", "Croissant", "Blueberry Muffin", "Chocolate Cupcake", "Red Velvet Jar Cake"];
+    var ids = ["cakeqty", "coffeeqty", "croissantqty", "muffinqty", "cupcakeqty", "jarcakeqty"];
+    var prices = [500, 180, 150, 120, 100, 120];
+    var times = [45, 30, 15, 15, 20, 20];
+
+    var tableContent = "<table border='1' cellpadding='10' style='margin:auto; text-align:center;'><tr><th>Item</th><th>Quantity</th><th>Price</th></tr>";
+
+    var total = 0;
+    var maxTime = 0;
+
+    for(var i=0; i<items.length; i++)
+    {
+        var qty = localStorage.getItem(ids[i]);
+        qty = parseInt(qty);
+
+        if(qty > 0)
+        {
+            var itemPrice = qty * prices[i];
+            total = total + itemPrice;
+
+            tableContent += "<tr><td>"+items[i]+"</td><td>"+qty+"</td><td>₹"+itemPrice+"</td></tr>";
+
+            if(times[i] > maxTime)
+            {
+                maxTime = times[i];
+            }
+        }
+    }
+
+    if(total >= 150)
+    {
+        var discount = total * 0.10;
+        total = total - discount;
+        document.getElementById("offer").innerHTML = "🎉 Offer Applied! 10% Discount";
+    }
+
+    tableContent += "</table>";
+
+    document.getElementById("orderTable").innerHTML = tableContent;
+    document.getElementById("totalPrice").innerHTML = "Total Price: ₹" + total;
+    document.getElementById("customerName").innerHTML = "Customer Name: " + localStorage.getItem("custname");
+    document.getElementById("customerPhone").innerHTML = "Phone: " + localStorage.getItem("phone");
+    document.getElementById("deliveryTime").innerHTML = "Estimated Delivery Time: " + maxTime + " minutes";
+}
+</script>
+
+</head>
+
+<body onload="showConfirmation()">
+
+<header>
+<h1>Sweet Bite Bakery & Cafe</h1>
+</header>
+
+<section style="text-align:center;">
+
+<h2>🎉 Your Order is Confirmed 🎉</h2>
+
+<p id="customerName"></p>
+<p id="customerPhone"></p>
+
+<br>
+
+<div id="orderTable"></div>
+
+<br>
+
+<p id="totalPrice" style="font-weight:bold;"></p>
+<p id="offer" style="color:green; font-weight:bold;"></p>
+<p id="deliveryTime" style="font-weight:bold;"></p>
+
+<br><br>
+
+<button onclick="window.location='index.html'">Go to Home</button>
+<button onclick="window.location='menu.html'">Go to Menu</button>
+
+</section>
+
+</body>
+
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Contact Us - Sweet Bite Bakery</title>
+<link rel="stylesheet" href="style.css">
+
+<script>
+function validateContactForm() {
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+    var message = document.getElementById("message").value;
+
+    if(name == "") {
+        alert("Please enter your name");
+        return false;
+    }
+
+    if(email == "") {
+        alert("Please enter your email");
+        return false;
+    }
+
+    if(phone == "" || phone.length != 10) {
+        alert("Please enter a valid 10-digit phone number");
+        return false;
+    }
+
+    if(message == "") {
+        alert("Please enter your message");
+        return false;
+    }
+
+    // Show confirmation message on page
+    document.getElementById("confirmationMsg").innerHTML =
+        "🎉 Thank you " + name + "! Your message has been sent. We will get back to you soon.";
+
+    // Reset form
+    document.getElementById("contactForm").reset();
+    return false; // prevent actual submission
+}
+</script>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color:cream
+    color:maroon 
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color:dark maroon
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+nav {
+    background-color:light beige
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    margin: 0 15px;
+    color:maroon
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+section {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color:white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #ccc;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Left column */
+.contact-left {
+    flex: 1 1 300px;
+    min-width: 300px;
+}
+
+/* Right column */
+.contact-right {
+    flex: 1 1 300px;
+    min-width: 300px;
+}
+
+.bakery-img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+form input[type="submit"] {
+    width: auto;
+    background-color: Sienna;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+form input[type="submit"]:hover {
+    background-color:maroon;
+}
+
+.contact-info {
+    line-height: 1.6;
+}
+
+.social-icons a {
+    color:Dark maroon;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.social-icons a:hover {
+    text-decoration: underline;
+}
+
+#confirmationMsg {
+    margin-top: 15px;
+    padding: 10px;
+    background-color:Tan;
+    color:Dark maroon;
+    font-weight: bold;
+    border-radius: 5px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Sweet Bite Bakery & Cafe</h1>
+</header>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="menu.html">Menu</a>
+<a href="order.html">Order</a>
+<a href="index.html#offers">Offers</a>
+<a href="contact.html">Contact</a>
+</nav>
+
+<section>
+
+<!-- Left Column: Image + Address + Social -->
+<div class="contact-left">
+    <img src="bakery1.jpg" alt="Sweet Bite Bakery" class="bakery-img">
+
+    <div class="contact-info">
+        <h3>Our Address:</h3>
+        <p>Sweet Bite Bakery & Cafe<br>
+        123 Bakery Street,<br>
+        Mumbai, India</p>
+
+        <h3>Follow Us:</h3>
+        <div class="social-icons">
+            <a href="#">Facebook</a> | 
+            <a href="#">Instagram</a> | 
+            <a href="#">Twitter</a>
+        </div>
+    </div>
+</div>
+
+<!-- Right Column: Contact Form -->
+<div class="contact-right">
+    <h2>Contact Us</h2>
+
+    <form id="contactForm" onsubmit="return validateContactForm();">
+
+        <label>Name:</label><br>
+        <input type="text" id="name"><br>
+
+        <label>Email:</label><br>
+        <input type="email" id="email"><br>
+
+        <label>Phone Number:</label><br>
+        <input type="text" id="phone"><br>
+
+        <label>Message:</label><br>
+        <textarea id="message" rows="5"></textarea><br>
+
+        <input type="submit" value="Send Message">
+
+    </form>
+
+    <!-- Confirmation Message -->
+    <div id="confirmationMsg"></div>
+</div>
+
+</section>
+
+</body>
+
+</html>

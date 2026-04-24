@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Order - Sweet Bite Bakery</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script>
+
+function calculateTotal()
+{
+
+var total = 0;
+var discount = 0;
+
+var cake = document.getElementById("cake").checked;
+var cakeqty = document.getElementById("cakeqty").value;
+
+var coffee = document.getElementById("coffee").checked;
+var coffeeqty = document.getElementById("coffeeqty").value;
+
+var croissant = document.getElementById("croissant").checked;
+var croissantqty = document.getElementById("croissantqty").value;
+
+var muffin = document.getElementById("muffin").checked;
+var muffinqty = document.getElementById("muffinqty").value;
+
+var cupcake = document.getElementById("cupcake").checked;
+var cupcakeqty = document.getElementById("cupcakeqty").value;
+
+var jarcake = document.getElementById("jarcake").checked;
+var jarcakeqty = document.getElementById("jarcakeqty").value;
+
+
+if(cupcake == true)
+{
+total = total + (cupcakeqty * 100);
+}
+
+if(jarcake == true)
+{
+total = total + (jarcakeqty * 120);
+}
+
+if(cake == true)
+{
+total = total + (cakeqty * 500);
+}
+
+if(coffee == true)
+{
+total = total + (coffeeqty * 180);
+}
+
+if(croissant == true)
+{
+total = total + (croissantqty * 150);
+}
+
+if(muffin == true)
+{
+total = total + (muffinqty * 120);
+}
+
+
+if(total >= 150)
+{
+discount = total * 0.10;
+total = total - discount;
+
+document.getElementById("offer").innerHTML = "Offer Applied! 10% Discount";
+}
+else
+{
+document.getElementById("offer").innerHTML = "";
+}
+
+document.getElementById("total").innerHTML = "₹" + total;
+
+
+localStorage.setItem("cakeqty", cakeqty);
+localStorage.setItem("coffeeqty", coffeeqty);
+localStorage.setItem("croissantqty", croissantqty);
+localStorage.setItem("muffinqty", muffinqty);
+localStorage.setItem("cupcakeqty", cupcakeqty);
+localStorage.setItem("jarcakeqty", jarcakeqty);
+
+localStorage.setItem("total", total);
+
+}
+
+
+function validateForm()
+{
+
+// Name validation
+var name = document.getElementById("name").value.trim();
+
+// Only alphabets + spaces allowed
+var namePattern = /^[A-Za-z\s]+$/;
+
+if(name == "")
+{
+    alert("Please enter your name");
+    return;
+}
+
+if(!namePattern.test(name))
+{
+    alert("Name should contain only alphabets");
+    return;
+}
+var phone = document.getElementById("phone").value;
+if(phone.length != 10)
+{
+alert("Enter valid 10 digit phone number");
+return false;
+}
+
+localStorage.setItem("custname", name);
+localStorage.setItem("phone", phone);
+
+window.location = "confirmation.html";
+
+return false;
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+<h1>Sweet Bite Bakery & Cafe</h1>
+</header>
+
+<nav>
+
+<a href="index.html">Home</a>
+<a href="menu.html">Menu</a>
+<a href="order.html">Order</a>
+<a href="index.html#offers">Offers</a>
+<a href="contact.html">Contact</a>
+
+</nav>
+
+<section>
+
+<h2>Place Your Order</h2>
+
+<form onsubmit="calculateTotal(); return validateForm();">
+
+Name<br>
+<input type="text" id="name"><br><br>
+
+Phone Number<br>
+<input type="text" id="phone"><br><br>
+
+<h3>Menu Items</h3>
+
+<table border="1" cellpadding="10">
+
+<tr>
+<td>Chocolate Cake (₹500)</td>
+<td><input type="checkbox" id="cake" onclick="calculateTotal()"></td>
+<td>Qty</td>
+<td><input type="number" id="cakeqty" value="0" onchange="calculateTotal()"></td>
+</tr>
+
+<tr>
+<td>Cappuccino (₹180)</td>
+<td><input type="checkbox" id="coffee" onclick="calculateTotal()"></td>
+<td>Qty</td>
+<td><input type="number" id="coffeeqty" value="0" onchange="calculateTotal()"></td>
+</tr>
+
+<tr>
+<td>Croissant (₹150)</td>
+<td><input type="checkbox" id="croissant" onclick="calculateTotal()"></td>
+<td>Qty</td>
+<td><input type="number" id="croissantqty" value="0" onchange="calculateTotal()"></td>
+</tr>
+
+<tr>
+<td>Blueberry Muffin (₹120)</td>
+<td><input type="checkbox" id="muffin" onclick="calculateTotal()"></td>
+<td>Qty</td>
+<td><input type="number" id="muffinqty" value="0" onchange="calculateTotal()"></td>
+</tr>
+
+<tr>
+<td>Chocolate Cupcake (₹100)</td>
+<td><input type="checkbox" id="cupcake" onclick="calculateTotal()"></td>
+<td>Qty</td>
+<td><input type="number" id="cupcakeqty" value="0" onchange="calculateTotal()"></td>
+</tr>
+
+<tr>
+<td>Red Velvet Jar Cake (₹120)</td>
+<td><input type="checkbox" id="jarcake" onclick="calculateTotal()"></td>
+<td>Qty</td>
+<td><input type="number" id="jarcakeqty" value="0" onchange="calculateTotal()"></td>
+</tr>
+
+</table>
+
+<br>
+
+<h3>Total Price: <span id="total">₹0</span></h3>
+
+<p id="offer" style="color:green;"></p>
+
+<br>
+
+<input type="submit" value="Place Order">
+
+</form>
+
+</section>
+
+</body>
+
+</html>
